@@ -128,8 +128,8 @@ public class Dijkstra {
 				Vertex otherVertex = graph.opposite(v1, edge);
 				
 				if (!((DijkstraNode)otherVertex.getData()).isKnown()) {
-					if (dnode.getValue() + (double)edge.getData() < ((DijkstraNode)otherVertex.getData()).getValue()) {
-						((DijkstraNode)otherVertex.getData()).setValue(dnode.getValue() + (double)edge.getData());
+					if (dnode.getValue() + (Double)edge.getData() < ((DijkstraNode)otherVertex.getData()).getValue()) {
+						((DijkstraNode)otherVertex.getData()).setValue(dnode.getValue() + (Double)edge.getData());
 						heap.update(((DijkstraNode)otherVertex.getData()).getPosition());
 						((DijkstraNode)otherVertex.getData()).setPrevious(dnode);
 					}
