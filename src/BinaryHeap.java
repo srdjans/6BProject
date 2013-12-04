@@ -122,19 +122,6 @@ public class BinaryHeap {
         node.setPosition(index);
     }
     
-    public void update(int index) {
-    	Comparable temp = elements[index];
-    	
-    	if (index > 1) {
-    		if (temp.compareTo(elements[index/2]) < 0) {
-    			percolateUp(index);
-    		} else {
-    			percolateDown(index);
-    		}
-    	}
-    }
-    
-    
     /**
      * Given an index in the heap array, percolate that key down the heap.
      * @param index     an index into the heap array
