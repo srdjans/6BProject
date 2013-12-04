@@ -27,8 +27,7 @@ public class DijkstraMinHeap {
         }        
         
         size++;
-        int index = size;
-        data[index] = value;
+        data[size] = value;
         
         percolateUp(size);
     }
