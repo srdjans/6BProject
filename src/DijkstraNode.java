@@ -2,7 +2,7 @@
  * 
  * This class represents a single Dijkstra node.
  * 
- * @author Srdjan Stojcic
+ * @author Srdjan Stojcic, My Hoang
  * @version 12.03.2013
  */
 public class DijkstraNode implements Comparable {
@@ -10,23 +10,36 @@ public class DijkstraNode implements Comparable {
 	/**
 	 * The value of this node
 	 */
-	private int value;
+	private int my_value;
 	
 	/**
-	 * The position of this node.
+	 * The position in the heap of this node
 	 */
-	private int position;
+	private int my_position;
+	
+	/**
+	 * The vertex
+	 */
+	private Vertex my_vertex;
+	
+	/**
+	 * The previous node 
+	 */
+	private DijkstraNode my_previous_node;
 	
 	/**
 	 * Creates a single Dijkstra node with the given information.
 	 * 
-	 * @param value
-	 * @param position
+	 * @param the_vertex The vertex of the node
+	 * @param the_value The value of the node
+	 * @param the_previous The previous node leading to this node
 	 */
-	public DijkstraNode(int value, int position) {
-		this.value = value;
-		this.position = position;
+	public DijkstraNode(Vertex the_vertex, int the_value, DijkstraNode the_previous) {
+		this.my_value = the_value;
+		this.my_vertex = the_vertex;
+		this.my_previous_node = the_previous;
 	}
+	
 
 	/**
 	 * Compares this DijkstraNode to another.
@@ -37,7 +50,13 @@ public class DijkstraNode implements Comparable {
 	 */
 	@Override
 	public int compareTo(Object o) {
-		return this.value - ((DijkstraNode)o).getValue();
+		if(my_vertex.hashCode() - o.hashCode() > 0) {
+			return 1;
+		}
+		else if (my_vertex.hashCode() - o.hashCode() < 0) {
+			return -1;
+		}
+		return 0;
 	}
 	
 	/**
@@ -46,7 +65,7 @@ public class DijkstraNode implements Comparable {
 	 * @return this node's value
 	 */
 	public int getValue() {
-		return value;
+		return my_value;
 	}
 	
 	/**
@@ -55,6 +74,42 @@ public class DijkstraNode implements Comparable {
 	 * @return this node's position
 	 */
 	public int getPosition() {
-		return position;
+		return my_position;
+	}
+	
+	/**
+	 * Return this Vertex
+	 * 
+	 * @return this vertex
+	 */
+	public Vertex getVertex() {
+		return my_vertex;
+	}
+	
+	/**
+	 * Return the previous node
+	 * 
+	 * @return the previous node 
+	 */
+	public DijkstraNode getPrevious() {
+		return my_previous_node;
+	}
+	
+	/**
+	 * Set the new value
+	 * 
+	 * @param the_value The new value of this Node.
+	 */
+	public void setValue(int the_value) {
+		this.my_value = the_value;
+	}
+	
+	/**
+	 * Set a new previous node
+	 * 
+	 * @param the_node The new previous node
+	 */
+	public void setPrevious(DijkstraNode the_node) {
+		this.my_previous_node = the_node;
 	}
 }
