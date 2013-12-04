@@ -10,7 +10,7 @@ public class DijkstraNode implements Comparable {
 	/**
 	 * The value of this node
 	 */
-	private int my_value;
+	private double my_value;
 	
 	/**
 	 * The position in the heap of this node
@@ -28,16 +28,22 @@ public class DijkstraNode implements Comparable {
 	private DijkstraNode my_previous_node;
 	
 	/**
+	 * The known flag for Dijkstra algorithm.
+	 */
+	private boolean known;
+	
+	/**
 	 * Creates a single Dijkstra node with the given information.
 	 * 
 	 * @param the_vertex The vertex of the node
 	 * @param the_value The value of the node
 	 * @param the_previous The previous node leading to this node
 	 */
-	public DijkstraNode(Vertex the_vertex, int the_value, DijkstraNode the_previous) {
+	public DijkstraNode(Vertex the_vertex, double the_value, DijkstraNode the_previous) {
 		this.my_value = the_value;
 		this.my_vertex = the_vertex;
 		this.my_previous_node = the_previous;
+		this.known = false;
 	}
 	
 
@@ -50,13 +56,7 @@ public class DijkstraNode implements Comparable {
 	 */
 	@Override
 	public int compareTo(Object o) {
-		if(my_vertex.hashCode() - o.hashCode() > 0) {
-			return 1;
-		}
-		else if (my_vertex.hashCode() - o.hashCode() < 0) {
-			return -1;
-		}
-		return 0;
+		return Double.compare(my_value, ((DijkstraNode)o).getValue());
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class DijkstraNode implements Comparable {
 	 * 
 	 * @return this node's value
 	 */
-	public int getValue() {
+	public double getValue() {
 		return my_value;
 	}
 	
@@ -75,6 +75,13 @@ public class DijkstraNode implements Comparable {
 	 */
 	public int getPosition() {
 		return my_position;
+	}
+	
+	/**
+	 * Sets this node's position.
+	 */
+	public void setPosition(int position) {
+		my_position = position;
 	}
 	
 	/**
@@ -100,8 +107,24 @@ public class DijkstraNode implements Comparable {
 	 * 
 	 * @param the_value The new value of this Node.
 	 */
-	public void setValue(int the_value) {
+	public void setValue(double the_value) {
 		this.my_value = the_value;
+	}
+	
+	/**
+	 * Returns true if this node is known and false otherwise
+	 * 
+	 * @return Whether this node has been marked as known.
+	 */
+	public boolean isKnown() {
+		return known;
+	}
+	
+	/**
+	 * Set the known flag for this node.
+	 */
+	public void setKnown(boolean b) {
+		known = b;
 	}
 	
 	/**
