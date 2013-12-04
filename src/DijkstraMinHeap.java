@@ -1,17 +1,16 @@
 import java.util.Arrays;
 
 /**
- * 
+ * DijkstraMinHeap class.
  *
  */
 public class DijkstraMinHeap {
     private static final int INITIAL_SIZE = 20;
-    protected DijkstraNode[] data;
-    protected int size;
+    private DijkstraNode[] data;
+    private int size;
     
     /**
      * Constructs a new DijkstraMinHeap
-     * @return 
      */
 	public DijkstraMinHeap () {
         data = (DijkstraNode[])new Comparable[INITIAL_SIZE];  
