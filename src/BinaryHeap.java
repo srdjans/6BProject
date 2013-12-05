@@ -1,8 +1,8 @@
 /**
  * A binary minheap of comparable objects.
  * 
- * @author Donald Chinn, Srdjan Stojcic (modified percolate methods to work with Dijkstra class)
- * @version September 19, 2003
+ * @author Donald Chinn, Peter Pentescu (modified percolate methods to work with Dijkstra class)
+ * @version 12.03.2013
  */
 public class BinaryHeap {
     

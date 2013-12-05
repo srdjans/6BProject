@@ -7,8 +7,8 @@ import java.util.Stack;
  * This class implements Dijkstra's algorithm to find the shortest path
  * between two cities. 
  * 
- * @author Srdjan Stojcic
- * @version 12.3.2013
+ * @author Srdjan Stojcic, My Hoang, Peter Pentescu
+ * @version 12.4.2013
  *
  */
 public class Dijkstra {
