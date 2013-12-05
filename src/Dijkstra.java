@@ -104,8 +104,8 @@ public class Dijkstra {
 	}
 	
 	/**
-	 * Uses the Dijkstra algorithm to find the shortest path in the given graph, starting at the given node,
-	 * implemented using a heap.
+	 * Uses the Dijkstra algorithm to find the shortest path in the given graph, starting at 
+	 * the given node, implemented using a heap.
 	 * 
 	 * @param origin The starting location
 	 * @param graph The graph used to find the shortest path
@@ -131,11 +131,17 @@ public class Dijkstra {
 				Edge edge = (Edge)edges.next();
 				if(edge.getFirstEndpoint().equals(v1)) {
 					Vertex otherVertex = graph.opposite(v1, edge);
-				
+					// If the other vertex is not known
 					if (!((DijkstraNode)otherVertex.getData()).isKnown()) {
-						if (dnode.getValue() + (Double)edge.getData() < ((DijkstraNode)otherVertex.getData()).getValue()) {
-							((DijkstraNode)otherVertex.getData()).setValue(dnode.getValue() + (Double)edge.getData());
+						// check if the sum of this vertex and the edge is smaller than its value
+						if (dnode.getValue() + (Double)edge.getData() < 
+								((DijkstraNode)otherVertex.getData()).getValue()) {
+							// if it is, update the value
+							((DijkstraNode)otherVertex.getData()).setValue(dnode.getValue() 
+									+ (Double)edge.getData());
+							// and percolate up
 							heap.percolateUp(((DijkstraNode)otherVertex.getData()).getPosition());
+							// set previous vertex
 							((DijkstraNode)otherVertex.getData()).setPrevious(dnode);
 						}
 					}
