@@ -66,21 +66,25 @@ public class Dijkstra {
 	 * @param finish The destination node used to backtrack the path.
 	 */
 	private static void printResults(DijkstraNode finish) {
-		Stack<Vertex> stack = new Stack<Vertex>();
-		
-		DijkstraNode temp = finish;
-		while(temp != null) {
-			stack.push(temp.getVertex());
-			temp = temp.getPrevious();
+		if(finish.getValue() < Double.MAX_VALUE) {
+			Stack<Vertex> stack = new Stack<Vertex>();
+			
+			DijkstraNode temp = finish;
+			while(temp != null) {
+				stack.push(temp.getVertex());
+				temp = temp.getPrevious();
+			}
+			
+			System.out.print("Shortest path: ");
+			while(stack.size() > 1) {
+				System.out.print(stack.pop().getName() + ", ");
+			}
+			System.out.print(stack.pop().getName() + ".\n");
+			
+			System.out.println("The length of the path is: " + finish.getValue());
+		} else {
+			System.out.println("No path found.");
 		}
-		
-		System.out.print("Shortest path: ");
-		while(stack.size() > 1) {
-			System.out.print(stack.pop().getName() + ", ");
-		}
-		System.out.print(stack.pop().getName() + ".\n");
-		
-		System.out.println("The length of the path is: " + finish.getValue());
 	}
 
 	/**
@@ -125,15 +129,17 @@ public class Dijkstra {
 			
 			while (edges.hasNext()) {
 				Edge edge = (Edge)edges.next();
-				Vertex otherVertex = graph.opposite(v1, edge);
+				if(edge.getFirstEndpoint().equals(v1)) {
+					Vertex otherVertex = graph.opposite(v1, edge);
 				
-				if (!((DijkstraNode)otherVertex.getData()).isKnown()) {
-					if (dnode.getValue() + (Double)edge.getData() < ((DijkstraNode)otherVertex.getData()).getValue()) {
-						((DijkstraNode)otherVertex.getData()).setValue(dnode.getValue() + (Double)edge.getData());
-						heap.percolateUp(((DijkstraNode)otherVertex.getData()).getPosition());
-						((DijkstraNode)otherVertex.getData()).setPrevious(dnode);
+					if (!((DijkstraNode)otherVertex.getData()).isKnown()) {
+						if (dnode.getValue() + (Double)edge.getData() < ((DijkstraNode)otherVertex.getData()).getValue()) {
+							((DijkstraNode)otherVertex.getData()).setValue(dnode.getValue() + (Double)edge.getData());
+							heap.percolateUp(((DijkstraNode)otherVertex.getData()).getPosition());
+							((DijkstraNode)otherVertex.getData()).setPrevious(dnode);
+						}
 					}
-				}
+				}	
 			}	
 		}
 	}
